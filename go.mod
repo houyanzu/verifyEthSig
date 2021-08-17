@@ -1,4 +1,4 @@
-module github.com/houyanzu/verifyEthSig
+module e.coding.net/houyuejin/product/verifyEthSig
 
 go 1.16
 
