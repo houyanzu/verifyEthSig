@@ -51,3 +51,18 @@ func DecodeSignatureHex(signatureHex string) (r [32]byte, s [32]byte, v byte, er
 
 	return DecodeSignature(signatureBytes)
 }
+
+func SignStr(data, priKey string) (sigStr string, err error) {
+	privateKey, err := crypto.HexToECDSA(priKey)
+	if err != nil {
+		return
+	}
+	hash := signStrHash(data)
+
+	signature, err := crypto.Sign(hash, privateKey)
+	if err != nil {
+		return
+	}
+	signature[64] += 27
+	return hexutil.Encode(signature), nil
+}
